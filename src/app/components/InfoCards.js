@@ -1,4 +1,7 @@
+"use client";
+
 import { RefreshCcw, CreditCard, Headphones, Tag } from "lucide-react";
+import { motion } from "framer-motion";
 
 const cards = [
   {
@@ -29,17 +32,23 @@ export default function InfoCards() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
           {cards.map((card, index) => (
-            <div
+            <motion.div
               key={index}
               className="bg-white rounded-xl shadow-md p-6 flex flex-col items-center text-center hover:shadow-xl transition-shadow duration-300"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.5, delay: index * 0.2 }}
+              whileHover={{ scale: 1.05 }}
             >
               <div className="mb-4">{card.icon}</div>
               <h3 className="text-lg font-semibold mb-2">{card.title}</h3>
               <p className="text-gray-500">{card.subtitle}</p>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
     </section>
   );
 }
+
