@@ -1,63 +1,104 @@
+
+// src/components/Footer.jsx
 "use client";
-import Link from "next/link";
-import { Facebook, Twitter, Instagram, Youtube, Mail, Phone } from "lucide-react";
+
+import { Mail, Phone, MapPin, Facebook, Twitter, Linkedin } from "lucide-react";
+import Image from "next/image";
 
 export default function Footer() {
   return (
-    <footer className="bg-gray-900 text-gray-300 pt-10">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
-          {/* About */}
-          <div>
-            <h3 className="text-white text-lg font-semibold mb-4">📚 Book Hub</h3>
-            <p className="text-sm">
-              Book Hub is your one-stop destination for books, learning, and knowledge.
-              Explore trending collections and discover new reads every day.
-            </p>
-          </div>
-
-          {/* Quick Links */}
-          <div>
-            <h3 className="text-white text-lg font-semibold mb-4">Quick Links</h3>
-            <ul className="space-y-2">
-              <li><Link href="/" className="hover:text-indigo-400">Home</Link></li>
-              <li><Link href="/books" className="hover:text-indigo-400">Books</Link></li>
-              <li><Link href="/trending" className="hover:text-indigo-400">Trending</Link></li>
-              <li><Link href="/about" className="hover:text-indigo-400">About Us</Link></li>
-            </ul>
-          </div>
-
-          {/* Support */}
-          <div>
-            <h3 className="text-white text-lg font-semibold mb-4">Support</h3>
-            <ul className="space-y-2">
-              <li className="flex items-center gap-2">
-                <Mail size={16} /> support@bookhub.com
-              </li>
-              <li className="flex items-center gap-2">
-                <Phone size={16} /> +880 123 456 789
-              </li>
-              <li><Link href="/contact" className="hover:text-indigo-400">Contact Us</Link></li>
-              <li><Link href="/faq" className="hover:text-indigo-400">FAQ</Link></li>
-            </ul>
-          </div>
-
-          {/* Social Media */}
-          <div>
-            <h3 className="text-white text-lg font-semibold mb-4">Follow Us</h3>
-            <div className="flex space-x-4">
-              <Link href="#" className="hover:text-indigo-400"><Facebook size={20} /></Link>
-              <Link href="#" className="hover:text-indigo-400"><Twitter size={20} /></Link>
-              <Link href="#" className="hover:text-indigo-400"><Instagram size={20} /></Link>
-              <Link href="#" className="hover:text-indigo-400"><Youtube size={20} /></Link>
+    <footer className="bg-white  py-12">
+      <div className="container mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-10">
+        
+        {/* Logo + Contact */}
+        <div>
+          <div className="flex items-center gap-2 mb-4">
+            <div className="bg-[#FF7B6B] w-10 h-10 flex items-center justify-center rounded-full text-white font-bold">
+              📚
             </div>
+            <h2 className="text-xl font-bold text-gray-900">Book Hub</h2>
           </div>
+          <p className="text-gray-500 mb-2">Got Questions? Call us</p>
+          <p className="text-lg font-semibold text-gray-900 mb-4">+670 413 90 762</p>
+
+          <p className="flex items-center gap-2 text-gray-600 mb-2">
+            <Mail size={16} /> readit@gmail.com
+          </p>
+          <p className="flex items-center gap-2 text-gray-600">
+            <MapPin size={16} /> 79 Sleepy Hollow St. <br />
+            Jamaica, New York 1432
+          </p>
         </div>
 
-        {/* Bottom Bar */}
-        <div className="border-t border-gray-700 mt-10 py-4 text-center text-sm">
-          © {new Date().getFullYear()} Book Hub. All rights reserved.
+        {/* Customer Support */}
+        <div>
+          <h3 className="text-lg font-semibold text-gray-900 mb-4">
+            Customers Support
+          </h3>
+          <ul className="space-y-2 text-gray-600">
+            <li>Store List</li>
+            <li>Opening Hours</li>
+            <li>Contact Us</li>
+            <li>Return Policy</li>
+          </ul>
+        </div>
+
+        {/* Categories */}
+        <div>
+          <h3 className="text-lg font-semibold text-gray-900 mb-4">
+            Categories
+          </h3>
+          <ul className="space-y-2 text-gray-600">
+            <li>Novel Books</li>
+            <li>Poetry Books</li>
+            <li>Political Books</li>
+            <li>History Books</li>
+          </ul>
+        </div>
+
+        {/* Subscribe */}
+        <div>
+          <h3 className="text-lg font-semibold text-gray-900 mb-4">
+            Subscribe.
+          </h3>
+          <p className="text-gray-500 mb-3">
+            Our conversation is just getting started
+          </p>
+          <div className="flex mb-4">
+            <input
+              type="email"
+              placeholder="Enter Your Email"
+              className="flex-1 px-3 py-2 border rounded-l-lg outline-none"
+            />
+            <button className="bg-[#FF7B6B] text-white px-4 rounded-r-lg hover:bg-[#ff6650]">
+              Subscribe
+            </button>
+          </div>
+
+          {/* Social Icons */}
+          <div className="flex gap-3">
+            <a href="#" className="p-2 border rounded-md hover:bg-gray-100">
+              <Facebook size={16} />
+            </a>
+            <a href="#" className="p-2 border rounded-md hover:bg-gray-100">
+              <Twitter size={16} />
+            </a>
+            <a href="#" className="p-2 border rounded-md hover:bg-gray-100">
+              <Linkedin size={16} />
+            </a>
+          </div>
+        </div>
+      </div>
+
+      {/* Bottom */}
+      <div className="mt-12 border-t pt-6 flex flex-col md:flex-row justify-between items-center container mx-auto px-6 text-gray-500 text-sm">
+        <p>© All Rights Reserved 2025 By <span className="text-[#FF7B6B]">Book Hub</span>.</p>
+
+        <div className="flex items-center gap-4 mt-4 md:mt-0">
+          <Image src="/paypal.png" alt="PayPal" width={50} height={20} />
+          <Image src="/visa.png" alt="Visa" width={50} height={20} />
+          <Image src="/mastercard.png" alt="MasterCard" width={50} height={20} />
+          <Image src="/stripe.png" alt="Stripe" width={50} height={20} />
         </div>
       </div>
     </footer>
