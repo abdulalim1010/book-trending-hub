@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import InfoCards from "./components/InfoCards";
+import Featured from "./components/Featured";
 
 export default function Home() {
   return (
@@ -54,6 +55,8 @@ export default function Home() {
           </div>
         </div>
       </section>
+      {/* featcers */}
+      <Featured/>
 
       {/* Info Cards Section */}
       <InfoCards />
