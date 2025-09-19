@@ -1,4 +1,5 @@
 "use client";
+
 import Link from "next/link";
 import {
   Menu,
@@ -14,14 +15,66 @@ import {
   Linkedin,
 } from "lucide-react";
 import { useEffect, useState } from "react";
+import { useSession, signIn, signOut } from "next-auth/react";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [showNav, setShowNav] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
 
-  // Scroll effect
-  
+  const { data: session } = useSession();
+
+  // Optional: Scroll hide/show effect
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > lastScrollY) {
+        setShowNav(false);
+      } else {
+        setShowNav(true);
+      }
+      setLastScrollY(window.scrollY);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [lastScrollY]);
+
+  const menus = [
+    {
+      name: "Home",
+      links: [
+        { href: "/home1", label: "Home1" },
+        { href: "/home2", label: "Home2" },
+      ],
+    },
+    {
+      name: "Books",
+      links: [
+        { href: "/books/all", label: "All Books" },
+        { href: "/books/latest", label: "Latest" },
+      ],
+    },
+    {
+      name: "Trending",
+      links: [
+        { href: "/trending/today", label: "Today" },
+        { href: "/trending/week", label: "This Week" },
+      ],
+    },
+    {
+      name: "About",
+      links: [
+        { href: "/about/team", label: "Our Team" },
+        { href: "/about/mission", label: "Mission" },
+      ],
+    },
+    {
+      name: "Contact",
+      links: [
+        { href: "/contact/email", label: "Email" },
+        { href: "/contact/location", label: "Location" },
+      ],
+    },
+  ];
 
   return (
     <header
@@ -29,10 +82,10 @@ export default function Navbar() {
         showNav ? "translate-y-0" : "-translate-y-full"
       }`}
     >
-      {/* --- Top Navbar --- */}
+      {/* Top Navbar */}
       <div className="bg-teal-500 text-white text-sm">
         <div className="max-w-7xl mx-auto flex justify-between items-center px-4 py-2">
-          {/* Left: Social Links with Icons */}
+          {/* Social Icons */}
           <div className="flex space-x-3">
             <Link href="#" className="hover:text-gray-200">
               <Facebook size={16} />
@@ -48,19 +101,36 @@ export default function Navbar() {
             </Link>
           </div>
 
-          {/* Right: Auth Links */}
-          <div className="space-x-4">
-            <Link href="/register" className="hover:underline">
-              Register
-            </Link>
-            <Link href="/login" className="hover:underline">
-              Log In
-            </Link>
+          {/* Auth Links */}
+          <div className="space-x-4 flex items-center">
+            {session ? (
+              <>
+                <span>Welcome, {session.user?.name}</span>
+                <button
+                  onClick={() => signOut()}
+                  className="hover:underline"
+                >
+                  Logout
+                </button>
+              </>
+            ) : (
+              <>
+                <Link href="/register" className="hover:underline">
+                  Register
+                </Link>
+                <button
+                  onClick={() => signIn("google")}
+                  className="hover:underline"
+                >
+                  Login
+                </button>
+              </>
+            )}
           </div>
         </div>
       </div>
 
-      {/* --- Main Navbar --- */}
+      {/* Main Navbar */}
       <nav className="bg-white shadow-md">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
@@ -69,46 +139,10 @@ export default function Navbar() {
               📚 Book Hub
             </Link>
 
-            {/* Desktop Menu with Dropdown */}
+            {/* Desktop Menu */}
             <div className="hidden md:flex items-center space-x-6 relative">
               <div className="flex space-x-6 items-center">
-                {[
-                  {
-                    name: "Home",
-                    links: [
-                      { href: "/home1", label: "Home1" },
-                      { href: "/home2", label: "Home2" },
-                    ],
-                  },
-                  {
-                    name: "Books",
-                    links: [
-                      { href: "/books/all", label: "All Books" },
-                      { href: "/books/latest", label: "Latest" },
-                    ],
-                  },
-                  {
-                    name: "Trending",
-                    links: [
-                      { href: "/trending/today", label: "Today" },
-                      { href: "/trending/week", label: "This Week" },
-                    ],
-                  },
-                  {
-                    name: "About",
-                    links: [
-                      { href: "/about/team", label: "Our Team" },
-                      { href: "/about/mission", label: "Mission" },
-                    ],
-                  },
-                  {
-                    name: "Contact",
-                    links: [
-                      { href: "/contact/email", label: "Email" },
-                      { href: "/contact/location", label: "Location" },
-                    ],
-                  },
-                ].map((menu) => (
+                {menus.map((menu) => (
                   <div key={menu.name} className="relative group">
                     <button className="flex items-center hover:text-teal-500">
                       {menu.name}
@@ -132,7 +166,7 @@ export default function Navbar() {
                 ))}
               </div>
 
-              {/* Notification + Icons */}
+              {/* Icons */}
               <div className="ml-6 flex items-center space-x-4">
                 <button className="hover:text-teal-500">
                   <Search size={20} />
@@ -164,43 +198,7 @@ export default function Navbar() {
         {isOpen && (
           <div className="md:hidden bg-white shadow-md">
             <div className="flex flex-col px-4 py-2 space-y-2">
-              {[
-                {
-                  name: "Home",
-                  links: [
-                    { href: "/home1", label: "Home1" },
-                    { href: "/home2", label: "Home2" },
-                  ],
-                },
-                {
-                  name: "Books",
-                  links: [
-                    { href: "/books/all", label: "All Books" },
-                    { href: "/books/latest", label: "Latest" },
-                  ],
-                },
-                {
-                  name: "Trending",
-                  links: [
-                    { href: "/trending/today", label: "Today" },
-                    { href: "/trending/week", label: "This Week" },
-                  ],
-                },
-                {
-                  name: "About",
-                  links: [
-                    { href: "/about/team", label: "Our Team" },
-                    { href: "/about/mission", label: "Mission" },
-                  ],
-                },
-                {
-                  name: "Contact",
-                  links: [
-                    { href: "/contact/email", label: "Email" },
-                    { href: "/contact/location", label: "Location" },
-                  ],
-                },
-              ].map((menu) => (
+              {menus.map((menu) => (
                 <details key={menu.name} className="group">
                   <summary className="flex justify-between items-center cursor-pointer hover:text-teal-500">
                     {menu.name}
@@ -227,11 +225,37 @@ export default function Navbar() {
                 <button className="hover:text-teal-500">
                   <ShoppingCart size={20} />
                 </button>
-                
                 <button className="relative p-2 text-gray-700 hover:text-teal-500">
                   <Bell size={22} />
                   <span className="absolute top-0 right-0 inline-block w-2 h-2 bg-red-500 rounded-full"></span>
                 </button>
+              </div>
+
+              {/* Mobile Auth Links */}
+              <div className="mt-3 space-y-2">
+                {session ? (
+                  <>
+                    <span>Welcome, {session.user?.name}</span>
+                    <button
+                      onClick={() => signOut()}
+                      className="hover:underline"
+                    >
+                      Logout
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <Link href="/register" className="hover:underline">
+                      Register
+                    </Link>
+                    <button
+                      onClick={() => signIn("google")}
+                      className="hover:underline"
+                    >
+                      Login
+                    </button>
+                  </>
+                )}
               </div>
             </div>
           </div>
