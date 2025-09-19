@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import InfoCards from "./components/InfoCards";
 import Featured from "./components/Featured";
+import TopRatedBooks from "./components/TopRatedBooks";
 
 export default function Home() {
   return (
@@ -57,7 +58,8 @@ export default function Home() {
       </section>
       {/* featcers */}
       <Featured/>
-
+      {/* top rated */}
+      <TopRatedBooks/>
       {/* Info Cards Section */}
       <InfoCards />
     </div>
