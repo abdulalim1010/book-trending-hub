@@ -3,6 +3,7 @@ import Link from "next/link";
 import InfoCards from "./components/InfoCards";
 import Featured from "./components/Featured";
 import TopRatedBooks from "./components/TopRatedBooks";
+import AllBooksPage from "./components/AllBooksPage";
 
 export default function Home() {
   return (
@@ -55,7 +56,11 @@ export default function Home() {
             </div>
           </div>
         </div>
+       
+
       </section>
+      {/* all bokks */}
+      <AllBooksPage/>
       {/* featcers */}
       <Featured/>
       {/* top rated */}
