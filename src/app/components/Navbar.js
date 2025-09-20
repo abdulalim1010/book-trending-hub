@@ -42,7 +42,7 @@ export default function Navbar() {
     {
       name: "Home",
       links: [
-        { href: "/home1", label: "Home1" },
+        { href: "/", label: "Home1" },
         { href: "/home2", label: "Home2" },
       ],
     },
@@ -115,15 +115,12 @@ export default function Navbar() {
               </>
             ) : (
               <>
-                <Link href="/register" className="hover:underline">
-                  Register
-                </Link>
-                <button
-                  onClick={() => signIn("google")}
-                  className="hover:underline"
-                >
-                  Login
-                </button>
+                 <Link href="/register" className="hover:underline">
+      Register
+    </Link>
+    <Link href="/login" className="hover:underline">
+      Login
+    </Link>
               </>
             )}
           </div>
@@ -245,15 +242,12 @@ export default function Navbar() {
                   </>
                 ) : (
                   <>
-                    <Link href="/register" className="hover:underline">
-                      Register
-                    </Link>
-                    <button
-                      onClick={() => signIn("google")}
-                      className="hover:underline"
-                    >
-                      Login
-                    </button>
+                   <Link href="/register" className="hover:underline">
+      Register
+    </Link>
+                     <Link href="/login" className="hover:underline">
+      Login
+    </Link>
                   </>
                 )}
               </div>
